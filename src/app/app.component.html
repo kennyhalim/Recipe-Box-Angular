@@ -7,21 +7,27 @@
 </form>
 
 <div *ngFor='let currentRecipe of recipes'>
-  <h3 [class] ="difficultyColor(currentRecipe)">{{currentRecipe.title}}</h3>
-  <h5>Ingredients:</h5>
-  <ul>
-    <li *ngFor='let currentIngredient of currentRecipe.ingredients'>{{currentIngredient}}</li>
-  </ul>
-  <h5>Instructions:</h5>
-  <ol>
-    <li *ngFor='let currentInstructions of currentRecipe.instructions'>{{currentInstructions}}</li>
-  </ol>
-  <button (click)="editRecipe(currentRecipe)">Edit</button>
+  <div class="title">
+    <h3 [class]="difficultyColor(currentRecipe)" (click)="currentRecipe.showRecipe()">{{currentRecipe.title}}</h3>
+  </div>
+
+  <div *ngIf="currentRecipe.shown">
+    <h5>Ingredients:</h5>
+    <ul>
+      <li *ngFor='let currentIngredient of currentRecipe.ingredients'>{{currentIngredient}}</li>
+    </ul>
+    <h5>Instructions:</h5>
+    <ol>
+      <li *ngFor='let currentInstructions of currentRecipe.instructions'>{{currentInstructions}}</li>
+    </ol>
+    <button (click)="editRecipe(currentRecipe)">Edit</button>
+  </div>
+
 </div>
 
 <div *ngIf="selectedRecipe">
   <h3>{{selectedRecipe.title}}</h3>
-  <p>Recipe Difficult? {{selectedRecipe.difficulty}}</p>
+  <p>Recipe Difficulty: {{selectedRecipe.difficulty}}</p>
   <h3>Edit Recipe</h3>
   <label>Enter Recipe Title</label>
   <input [(ngModel)]="selectedRecipe.title">
@@ -32,3 +38,9 @@
   <input type="radio" [(ngModel)]="selectedRecipe.difficulty" value="hard">hard<br>
   <button (click)="finishedEditing()">Done</button>
 </div>
+
+
+<!-- <form id="newRecipeForm"> -->
+  Recipe Name: <input type="text" name="name" id="recipeName"><br>
+  <button (click)="addRecipe()">Go</button>
+<!-- </form> -->

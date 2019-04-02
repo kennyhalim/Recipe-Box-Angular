@@ -31,4 +31,14 @@ export class AppComponent {
       return 'bg-danger';
     }
   }
+
+  addRecipe() {
+    let title: string = document.getElementById("recipeName").value;
+    document.getElementById("recipeName").value = "";
+    let recipe: Recipe = new Recipe(title);
+    this.recipes.push(recipe);
+    console.log(recipe.title);
+
+
+  }
 }
