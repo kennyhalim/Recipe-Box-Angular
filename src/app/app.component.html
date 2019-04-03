@@ -41,6 +41,6 @@
 
 
 <!-- <form id="newRecipeForm"> -->
-  Recipe Name: <input type="text" name="name" id="recipeName"><br>
-  <button (click)="addRecipe()">Go</button>
+  Recipe Name: <input type="text" name="name" #recipeName id="recipeName2"><br>
+  <button (click)="addRecipe(recipeName.value)">Go</button>
 <!-- </form> -->

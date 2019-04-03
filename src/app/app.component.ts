@@ -32,13 +32,10 @@ export class AppComponent {
     }
   }
 
-  addRecipe() {
-    let title: string = document.getElementById("recipeName").value;
-    document.getElementById("recipeName").value = "";
-    let recipe: Recipe = new Recipe(title);
-    this.recipes.push(recipe);
-    console.log(recipe.title);
-
+  addRecipe(recipeName: string) {
+    let newRecipe = new Recipe(recipeName,['flour', 'sugar', 'eggs', 'milk', 'butter'], ['mix ingredients', 'bake at 400 degrees for 10 minutes'], 'allrecipes', 'hard');
+    (document.getElementById("recipeName2") as HTMLInputElement).value = "";
+    this.recipes.push(newRecipe);
 
   }
 }
