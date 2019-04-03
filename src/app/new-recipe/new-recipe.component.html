@@ -1,0 +1,14 @@
+<h1>New recipe</h1>
+<div>
+  <label>Enter Recipe Title</label>
+  <input #newTitle>
+</div>
+<div>
+  <label>Recipe Difficulty</label>
+  <select #newDifficulty>
+    <option [value]="easy">easy</option>
+    <option [value]="medium">medium</option>
+    <option [value]="hard">hard</option>
+  </select>
+  <button (click)="submitForm(newTitle.value, newDifficulty.value); newTitle.value='';">Add</button>
+</div>

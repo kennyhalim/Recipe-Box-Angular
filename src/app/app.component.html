@@ -6,41 +6,13 @@
   <input [(ngModel)]="userName" type="text" name="user">
 </form>
 
-<div *ngFor='let currentRecipe of recipes'>
-  <div class="title">
-    <h3 [class]="difficultyColor(currentRecipe)" (click)="currentRecipe.showRecipe()">{{currentRecipe.title}}</h3>
-  </div>
+<app-recipe-list [childRecipeList]="masterRecipes" (clickSender)="editRecipe($event)"></app-recipe-list>
 
-  <div *ngIf="currentRecipe.shown">
-    <h5>Ingredients:</h5>
-    <ul>
-      <li *ngFor='let currentIngredient of currentRecipe.ingredients'>{{currentIngredient}}</li>
-    </ul>
-    <h5>Instructions:</h5>
-    <ol>
-      <li *ngFor='let currentInstructions of currentRecipe.instructions'>{{currentInstructions}}</li>
-    </ol>
-    <button (click)="editRecipe(currentRecipe)">Edit</button>
-  </div>
+<app-edit-recipe [childSelectedRecipe]="selectedRecipe" (clickedDone)="finishedEditing()"></app-edit-recipe>
 
-</div>
+<app-new-recipe (sendRecipe)="addRecipe($event)"></app-new-recipe>
 
-<div *ngIf="selectedRecipe">
-  <h3>{{selectedRecipe.title}}</h3>
-  <p>Recipe Difficulty: {{selectedRecipe.difficulty}}</p>
-  <h3>Edit Recipe</h3>
-  <label>Enter Recipe Title</label>
-  <input [(ngModel)]="selectedRecipe.title">
-  <label> Enter Recipe Difficulty (easy, medium, hard):</label>
-  <br>
-  <input type="radio" [(ngModel)]="selectedRecipe.difficulty" value="easy">easy<br>
-  <input type="radio" [(ngModel)]="selectedRecipe.difficulty" value="medium">medium<br>
-  <input type="radio" [(ngModel)]="selectedRecipe.difficulty" value="hard">hard<br>
-  <button (click)="finishedEditing()">Done</button>
-</div>
-
-
-<!-- <form id="newRecipeForm"> -->
+<!-- <form id="newRecipeForm">
   Recipe Name: <input type="text" name="name" #recipeName id="recipeName2"><br>
   <button (click)="addRecipe(recipeName.value)">Go</button>
-<!-- </form> -->
+</form> -->

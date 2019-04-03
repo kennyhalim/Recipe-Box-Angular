@@ -1,0 +1,25 @@
+<select (change)="onChange($event.target.value)">
+  <option value="allRecipes">All Recipes</option>
+  <option value="cookedRecipes">Cooked Recipes</option>
+  <option value="nonCookedRecipes" selected="selected">Non-cooked recipes</option>
+</select>
+
+<div *ngFor='let currentRecipe of childRecipeList | cooked:filterByCooked'>
+  <div class="title">
+    <h3 [class]="difficultyColor(currentRecipe)" (click)="currentRecipe.showRecipe()">{{currentRecipe.title}}</h3>
+  </div>
+
+  <div *ngIf="currentRecipe.shown">
+    <h5>Ingredients:</h5>
+    <ul>
+      <li *ngFor='let currentIngredient of currentRecipe.ingredients'>{{currentIngredient}}</li>
+    </ul>
+    <h5>Instructions:</h5>
+    <ol>
+      <li *ngFor='let currentInstructions of currentRecipe.instructions'>{{currentInstructions}}</li>
+    </ol>
+    <input *ngIf="currentRecipe.cooked === true" type="checkbox" checked (click)="toggleDone(currentRecipe)"/>
+    <input *ngIf="currentRecipe.cooked === false" type="checkbox" (click)="toggleDone(currentRecipe)"/>
+    <button (click)="editButtonClicked(currentRecipe)">Edit</button>
+  </div>
+</div>
